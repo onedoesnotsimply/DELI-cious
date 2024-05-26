@@ -91,18 +91,81 @@ public class UserInterface {
         // Add toppings and sauces
         System.out.println("---------------------------");
         System.out.println("Select toppings");
-        ArrayList<String> toppings = toppingsSelect();
+        ArrayList<String> toppings = new ArrayList<>();
+        toppingsSelect(toppings);
 
         System.out.println("---------------------------");
         System.out.println("Select sauces");
-        
+        ArrayList<String> sauces = new ArrayList<>();
+        saucesSelect(sauces);
 
-        //order.getSandwiches().add();
-        //orderScreen();
+        System.out.println("---------------------------");
+        System.out.println("Would you like your sandwich toasted (Y/N)");
+        scanner.nextLine();
+        String toasted = scanner.nextLine();
+
+        boolean isToasted = false;
+        if (toasted.equalsIgnoreCase("y")){
+            isToasted = true;
+        }
+
+        // Create the sandwich and add it to the order
+        Sandwich sandwich = new Sandwich(size, meat, cheese, extraMeat, extraCheese,bread,isToasted);
+        order.getSandwiches().add(sandwich);
+        // Send the user back to the order screen
+        orderScreen();
     }
 
-    private ArrayList<String> toppingsSelect() {
-        ArrayList<String> toppings = new ArrayList<>();
+    private void saucesSelect(ArrayList<String> sauces) {
+        System.out.println("""
+                1) Mayo
+                2) Mustard
+                3) Ketchup
+                4) Ranch
+                5) Thousand Island
+                6) Vinaigrette
+                0) None
+                """);
+        int choice = scanner.nextInt();
+
+        switch (choice){
+            case 1:
+                sauces.add("Mayo");
+                break;
+            case 2:
+                sauces.add("Mustard");
+                break;
+            case 3:
+                sauces.add("Ketchup");
+                break;
+            case 4:
+                sauces.add("Ranch");
+                break;
+            case 5:
+                sauces.add("Thousand Island");
+                break;
+            case 6:
+                sauces.add("Vinaigrette");
+                break;
+            case 0:
+                sauces.add("None");
+            default:
+                System.out.println("Not an available option");
+                saucesSelect(sauces);
+        }
+        System.out.println("""
+                1) Add another
+                2) Done
+                """);
+        choice = scanner.nextInt();
+        if (choice==1){
+            saucesSelect(sauces);
+        } else {
+            System.out.println("'Done' selected");
+        }
+    }
+
+    private void toppingsSelect(ArrayList<String> toppings) {
         System.out.println("""
                 1) Lettuce
                 2) Peppers
@@ -165,16 +228,18 @@ public class UserInterface {
                 if (extraTopping("Guacamole")){
                     toppings.add("Extra Guacamole");
                 }
+                break;
             case 9:
                 toppings.add("Mushrooms");
                 if (extraTopping("Mushrooms")){
                     toppings.add("Extra Mushrooms");
                 }
+                break;
             case 0:
                 break;
             default:
                 System.out.println("Not an available option");
-                toppingsSelect();
+                toppingsSelect(toppings);
         }
 
         System.out.println("""
@@ -183,13 +248,10 @@ public class UserInterface {
                 """);
         choice = scanner.nextInt();
         if (choice==1){
-            toppingsSelect();
-        } else if (choice==2){
-            return toppings;
+            toppingsSelect(toppings);
         } else {
-            System.out.println("index out of range");
+            System.out.println("'Done' selected");
         }
-        return toppings;
     }
 
     private boolean extraTopping(String topping) {
