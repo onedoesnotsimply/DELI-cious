@@ -3,11 +3,11 @@ package com.pluralsight;
 import java.util.ArrayList;
 
 public class Sandwich {
+    private String size;
     private String meat;
     private String cheese;
     private boolean extraMeat;
     private boolean extraCheese;
-    private String size;
     private String bread;
     private ArrayList<String> sauces;
     private ArrayList<String> toppings;
@@ -24,16 +24,17 @@ public class Sandwich {
         this.isToasted = isToasted;
         this.sauces = new ArrayList<>();
         this.toppings = new ArrayList<>();
+        this.price=0.0;
     }
 
     @Override
     public String toString() {
         return "Sandwich{" +
-                "meat='" + meat + '\'' +
+                "size='" + size + '\'' +
+                ", meat='" + meat + '\'' +
                 ", cheese='" + cheese + '\'' +
                 ", extraMeat=" + extraMeat +
                 ", extraCheese=" + extraCheese +
-                ", size='" + size + '\'' +
                 ", bread='" + bread + '\'' +
                 ", sauces=" + sauces +
                 ", toppings=" + toppings +
@@ -115,11 +116,55 @@ public class Sandwich {
         isToasted = toasted;
     }
 
-    public double getPrice() {
-        return price;
-    }
 
-    public void setPrice(double price) {
-        this.price = price;
+    // Derived methods
+
+    public double getPrice() {
+        if (getSize().equalsIgnoreCase("s")){ //If the sandwich is 4"
+            price = 5.5;
+            if (!getMeat().isEmpty()) {
+                price+=1.0;
+            }
+            if (extraMeat){
+                price+=0.5;
+            }
+            if (!getCheese().isEmpty()) {
+                price+=0.75;
+            }
+            if (extraCheese){
+                price+=0.3;
+            }
+            return price;
+        } else if (getSize().equalsIgnoreCase("m")) {
+            price=7.0;
+            if (!getMeat().isEmpty()) {
+                price+=2.0;
+            }
+            if (extraMeat) {
+                price+=1.0;
+            }
+            if (!getCheese().isEmpty()) {
+                price+=1.5;
+            }
+            if (extraCheese) {
+                price+=0.6;
+            }
+            return price;
+        } else if (getSize().equalsIgnoreCase("l")) {
+            price=8.5;
+            if (getMeat().equalsIgnoreCase("y")) {
+                price+=3.0;
+            }
+            if (extraMeat) {
+                price+=1.5;
+            }
+            if (getCheese().equalsIgnoreCase("y")) {
+                price+=2.25;
+            }
+            if (extraCheese) {
+                price+=0.9;
+            }
+        }
+        return price;
     }
 }

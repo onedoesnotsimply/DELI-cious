@@ -12,6 +12,7 @@ public class Order {
         this.sandwiches = new ArrayList<>();
         this.drinks=new ArrayList<>();
         this.chips=new ArrayList<>();
+        this.total = 0;
     }
 
     public ArrayList<Sandwich> getSandwiches() {
