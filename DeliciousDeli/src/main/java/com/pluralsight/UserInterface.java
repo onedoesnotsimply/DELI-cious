@@ -111,7 +111,11 @@ public class UserInterface {
 
         // Create the sandwich and add it to the order
         Sandwich sandwich = new Sandwich(size, meat, cheese, extraMeat, extraCheese,bread,isToasted);
+        sandwich.setSauces(sauces);
+        sandwich.setToppings(toppings);
         order.getSandwiches().add(sandwich);
+        System.out.println(sandwich);
+        System.out.println(order);
         // Send the user back to the order screen
         orderScreen();
     }

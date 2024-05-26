@@ -15,6 +15,16 @@ public class Order {
         this.total = 0;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "sandwiches=" + sandwiches +
+                ", drinks=" + drinks +
+                ", chips=" + chips +
+                ", total=" + total +
+                '}';
+    }
+
     public ArrayList<Sandwich> getSandwiches() {
         return sandwiches;
     }

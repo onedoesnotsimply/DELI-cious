@@ -12,7 +12,7 @@ public class Sandwich {
     private ArrayList<String> sauces;
     private ArrayList<String> toppings;
     private boolean isToasted;
-    private double price;
+    //private double price;
 
     public Sandwich(String size, String meat, String cheese, boolean extraMeat, boolean extraCheese, String bread, boolean isToasted) {
         this.size = size;
@@ -24,7 +24,7 @@ public class Sandwich {
         this.isToasted = isToasted;
         this.sauces = new ArrayList<>();
         this.toppings = new ArrayList<>();
-        this.price=0.0;
+        //this.price=0.0;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Sandwich {
                 ", sauces=" + sauces +
                 ", toppings=" + toppings +
                 ", isToasted=" + isToasted +
-                ", price=" + price +
+                ", price=" + getPrice() +
                 '}';
     }
 
@@ -120,6 +120,7 @@ public class Sandwich {
     // Derived methods
 
     public double getPrice() {
+        double price = 0.0;
         if (getSize().equalsIgnoreCase("s")){ //If the sandwich is 4"
             price = 5.5;
             if (!getMeat().isEmpty()) {
