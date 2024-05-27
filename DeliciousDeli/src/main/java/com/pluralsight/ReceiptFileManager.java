@@ -1,17 +1,18 @@
 package com.pluralsight;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReceiptFileManager {
-    private String currentDateTime;
+    //private String currentDateTime;
     private Order order;
 
     public ReceiptFileManager(Order order){
-        this.currentDateTime=getDateTime();
+        //this.currentDateTime=getDateTime();
         this.order=order;
     }
 
@@ -24,7 +25,12 @@ public class ReceiptFileManager {
 
     public void saveReceipt() {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(currentDateTime+".txt"));
+            String filename = getDateTime()+".txt";
+            String filepath = "Receipts";
+
+            File file = new File(filepath, filename);
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(order.toString());
 
             bufferedWriter.close();
