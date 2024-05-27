@@ -9,6 +9,23 @@ public class Drink {
         this.flavor = flavor;
     }
 
+    @Override
+    public String toString() {
+        return "size : " + size + '\n' +
+                "flavor : " + flavor + '\n' +
+                "price : $"+ getPrice();
+    }
+
+    public double getPrice() {
+        if (size.equalsIgnoreCase("small")){
+            return 2;
+        } else if (size.equalsIgnoreCase("medium")){
+            return 2.5;
+        } else {
+            return 3;
+        }
+    }
+
     public String getSize() {
         return size;
     }

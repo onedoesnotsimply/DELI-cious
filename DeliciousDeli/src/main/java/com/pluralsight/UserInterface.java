@@ -56,7 +56,15 @@ public class UserInterface {
             } else if (choice==4) {
                 checkoutScreen();
             } else if (choice==0) {
+                // Delete the order
+                cancelOrder();
+                /*
+                order.getSandwiches().clear();
+                order.getChips().clear();
+                order.getDrinks().clear();
                 homeScreen();
+
+                 */
             } else {
                 System.out.println("Input out of range");
                 orderScreen();
@@ -81,12 +89,19 @@ public class UserInterface {
         System.out.println("---------------------------");
         System.out.println("Select a meat");
         String meat = meatSelect();
-        boolean extraMeat = extraTopping(meat);
+        boolean extraMeat = false;
+        if (!meat.equalsIgnoreCase("none")){
+            extraMeat=extraTopping(meat);
+        }
 
         System.out.println("---------------------------");
         System.out.println("Select a cheese");
         String cheese = cheeseSelect();
-        boolean extraCheese = extraTopping(cheese);
+        boolean extraCheese = false;
+        if (!cheese.equalsIgnoreCase("none")) {
+            extraCheese = extraTopping(cheese);
+        }
+
 
         // Add toppings and sauces
         System.out.println("---------------------------");
@@ -114,8 +129,6 @@ public class UserInterface {
         sandwich.setSauces(sauces);
         sandwich.setToppings(toppings);
         order.getSandwiches().add(sandwich);
-        System.out.println(sandwich);
-        System.out.println(order);
         // Send the user back to the order screen
         orderScreen();
     }
@@ -153,19 +166,21 @@ public class UserInterface {
                 break;
             case 0:
                 sauces.add("None");
+                break;
             default:
                 System.out.println("Not an available option");
                 saucesSelect(sauces);
+                break;
         }
-        System.out.println("""
+        if (choice!=0){
+            System.out.println("""
                 1) Add another
                 2) Done
                 """);
-        choice = scanner.nextInt();
-        if (choice==1){
-            saucesSelect(sauces);
-        } else {
-            System.out.println("'Done' selected");
+            choice = scanner.nextInt();
+            if (choice==1){
+                saucesSelect(sauces);
+            }
         }
     }
 
@@ -240,21 +255,23 @@ public class UserInterface {
                 }
                 break;
             case 0:
+                toppings.add("None");
                 break;
             default:
                 System.out.println("Not an available option");
                 toppingsSelect(toppings);
+                break;
         }
 
-        System.out.println("""
+        if (choice!=0){
+            System.out.println("""
                 1) Add another topping
                 2) Done
                 """);
-        choice = scanner.nextInt();
-        if (choice==1){
-            toppingsSelect(toppings);
-        } else {
-            System.out.println("'Done' selected");
+            choice = scanner.nextInt();
+            if (choice==1){
+                toppingsSelect(toppings);
+            }
         }
     }
 
@@ -296,6 +313,7 @@ public class UserInterface {
                 cheese="Swiss";
                 break;
             case 0:
+                cheese="None";
                 break;
             default:
                 System.out.println("Not an available option");
@@ -338,6 +356,7 @@ public class UserInterface {
                 meat="Bacon";
                 break;
             case 0:
+                meat="None";
                 break;
             default:
                 System.out.println("Not an available option");
@@ -379,9 +398,9 @@ public class UserInterface {
 
     private String sizeSelect() {
         System.out.println("""
-                1) Small (4\")
-                2) Medium (8\")
-                3) Large (12\")
+                1) 4\"
+                2) 8\"
+                3) 12\"
                 """);
 
         int choice = scanner.nextInt();
@@ -389,30 +408,155 @@ public class UserInterface {
         String size = "";
         switch (choice) {
             case 1:
-                size = "s";
+                size = "4\"";
                 break;
             case 2:
-                size = "m";
+                size = "8\"";
                 break;
             case 3:
-                size = "l";
+                size = "12\"";
                 break;
             default:
                 System.out.println("Not an available option");
                 sizeSelect();
+                break;
         }
         return size;
     }
 
     private void drinkScreen(){
-        //order.getDrinks().add();
+        System.out.println("---------------------------");
+        System.out.println("Select a drink size");
+        String size = drinkSize();
+
+        System.out.println("---------------------------");
+        System.out.println("Select a drink flavor");
+        String flavor = drinkFlavor();
+
+        Drink drink = new Drink(size,flavor);
+        order.getDrinks().add(drink);
+        orderScreen();
+    }
+
+    private String drinkFlavor() {
+        String flavor = "";
+        System.out.println("""
+                1) Coke
+                2) Iced Tea
+                3) Iced Tea - Unsweetened
+                4) Lemonade
+                """);
+
+        int choice = scanner.nextInt();
+        if (choice==1){
+            flavor="Coke";
+        } else if (choice==2) {
+            flavor="Iced Tea";
+        } else if (choice==3) {
+            flavor="Iced Tea - Unsweetened";
+        } else if (choice==4) {
+            flavor="Lemonade";
+        } else {
+            System.out.println("Not an available option");
+            drinkFlavor();
+        }
+        return flavor;
+    }
+
+    private String drinkSize() {
+        String size= "";
+        System.out.println("""
+                1) Small
+                2) Medium
+                3) Large
+                """);
+
+        int choice = scanner.nextInt();
+        if (choice==1){
+            size="Small";
+        } else if (choice==2) {
+            size="Medium";
+        } else if (choice==3) {
+            size="Large";
+        } else {
+            System.out.println("Not an available option");
+            drinkSize();
+        }
+        return size;
     }
 
     private void chipScreen() {
-        //order.getChips().add();
+        String type = "";
+        System.out.println("---------------------------");
+        System.out.println("Select a chip type");
+        System.out.println("""
+                1) Original
+                2) Nacho Cheese
+                3) Cool Ranch
+                4) Sour Cream & Onion
+                5) Salt & Vinegar
+                """);
+
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            type = "Original";
+        } else if (choice==2) {
+            type="Nacho Cheese";
+        } else if (choice==3) {
+            type="Cool Ranch";
+        } else if (choice==4) {
+            type="Sour Cream & Onion";
+        } else if (choice==5) {
+            type="Salt & Vinegar";
+        } else {
+            System.out.println("Not an available option");
+            chipScreen();
+        }
+
+        Chip chip = new Chip(type);
+        order.getChips().add(chip);
+        orderScreen();
     }
 
     private void checkoutScreen() {
+        System.out.println("---------------------------");
+        System.out.println("Order details\n");
+        // Print order
+        System.out.println(order);
 
+
+        System.out.println("Sandwiches");
+        for (Sandwich sandwich : order.getSandwiches()) {
+            System.out.println(sandwich);
+        }
+        System.out.println("Drinks");
+        for (Drink drink : order.getDrinks()){
+            System.out.println(drink);
+        }
+        System.out.println("Chips");
+        for (Chip chip : order.getChips()){
+            System.out.println(chip);
+        }
+        // Print out the total of the order
+        //System.out.printf("Order total : %.2f\n", order.getTotal());
+
+        System.out.println("""
+                1) Confirm
+                2) Cancel
+                """);
+        int choice = scanner.nextInt();
+        if (choice==1){
+            // Save receipt to file
+            cancelOrder();
+        } else if (choice==2){
+            cancelOrder();
+        }
+    }
+
+    private void cancelOrder() {
+        order.getSandwiches().clear();
+        order.getChips().clear();
+        order.getDrinks().clear();
+        homeScreen();
     }
 }

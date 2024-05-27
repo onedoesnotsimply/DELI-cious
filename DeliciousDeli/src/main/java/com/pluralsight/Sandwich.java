@@ -12,7 +12,6 @@ public class Sandwich {
     private ArrayList<String> sauces;
     private ArrayList<String> toppings;
     private boolean isToasted;
-    //private double price;
 
     public Sandwich(String size, String meat, String cheese, boolean extraMeat, boolean extraCheese, String bread, boolean isToasted) {
         this.size = size;
@@ -24,23 +23,20 @@ public class Sandwich {
         this.isToasted = isToasted;
         this.sauces = new ArrayList<>();
         this.toppings = new ArrayList<>();
-        //this.price=0.0;
     }
 
     @Override
     public String toString() {
-        return "Sandwich{" +
-                "size='" + size + '\'' +
-                ", meat='" + meat + '\'' +
-                ", cheese='" + cheese + '\'' +
-                ", extraMeat=" + extraMeat +
-                ", extraCheese=" + extraCheese +
-                ", bread='" + bread + '\'' +
-                ", sauces=" + sauces +
-                ", toppings=" + toppings +
-                ", isToasted=" + isToasted +
-                ", price=" + getPrice() +
-                '}';
+        return "size : " + size + '\n' +
+                "meat : " + meat + '\n' +
+                "extraMeat : " + extraMeat + '\n' +
+                "cheese : " + cheese + '\n' +
+                "extraCheese : " + extraCheese + '\n'+
+                "bread : " + bread + '\n' +
+                "sauces : " + sauces + '\n' +
+                "toppings : " + toppings + '\n' +
+                "toasted : " + isToasted + '\n' +
+                "price : $" + getPrice();
     }
 
     // Getters and setters
@@ -121,7 +117,7 @@ public class Sandwich {
 
     public double getPrice() {
         double price = 0.0;
-        if (getSize().equalsIgnoreCase("s")){ //If the sandwich is 4"
+        if (getSize().equalsIgnoreCase("4\"")){ //If the sandwich is 4"
             price = 5.5;
             if (!getMeat().isEmpty()) {
                 price+=1.0;
@@ -136,7 +132,7 @@ public class Sandwich {
                 price+=0.3;
             }
             return price;
-        } else if (getSize().equalsIgnoreCase("m")) {
+        } else if (getSize().equalsIgnoreCase("8\"")) {
             price=7.0;
             if (!getMeat().isEmpty()) {
                 price+=2.0;
@@ -151,7 +147,7 @@ public class Sandwich {
                 price+=0.6;
             }
             return price;
-        } else if (getSize().equalsIgnoreCase("l")) {
+        } else if (getSize().equalsIgnoreCase("12\"")) {
             price=8.5;
             if (getMeat().equalsIgnoreCase("y")) {
                 price+=3.0;
