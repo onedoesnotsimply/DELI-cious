@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +23,14 @@ public class ReceiptFileManager {
     }
 
     public void saveReceipt() {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(currentDateTime+".txt"));
+            bufferedWriter.write(order.toString());
 
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

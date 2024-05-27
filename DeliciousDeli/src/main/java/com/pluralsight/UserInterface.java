@@ -1,6 +1,5 @@
 package com.pluralsight;
 
-import java.awt.*;
 import java.util.*;
 
 public class UserInterface {
@@ -58,13 +57,6 @@ public class UserInterface {
             } else if (choice==0) {
                 // Delete the order
                 cancelOrder();
-                /*
-                order.getSandwiches().clear();
-                order.getChips().clear();
-                order.getDrinks().clear();
-                homeScreen();
-
-                 */
             } else {
                 System.out.println("Input out of range");
                 orderScreen();
@@ -398,9 +390,9 @@ public class UserInterface {
 
     private String sizeSelect() {
         System.out.println("""
-                1) 4\"
-                2) 8\"
-                3) 12\"
+                1) 4"
+                2) 8"
+                3) 12"
                 """);
 
         int choice = scanner.nextInt();
@@ -547,6 +539,8 @@ public class UserInterface {
         int choice = scanner.nextInt();
         if (choice==1){
             // Save receipt to file
+            ReceiptFileManager receiptFileManager = new ReceiptFileManager(order);
+            receiptFileManager.saveReceipt();
             cancelOrder();
         } else if (choice==2){
             cancelOrder();
