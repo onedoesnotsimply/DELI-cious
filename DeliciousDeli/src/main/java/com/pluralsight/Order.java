@@ -19,9 +19,9 @@ public class Order {
     @Override
     public String toString() {
         return "Order\n" +
-                "Sandwiches :\n" + sandwiches +
-                "\nDrinks :\n" + drinks +
-                "\nChips :\n" + chips +
+                "Sandwiches\n" + sandwiches +
+                "\nDrinks\n" + drinks +
+                "\nChips\n" + chips +
                 "\nOrder Total : " + getTotal();
     }
 

@@ -1,0 +1,20 @@
+Order
+Sandwiches :
+[size : 8"
+meat : Steak
+extraMeat : true
+cheese : Provolone
+extraCheese : false
+bread : White
+sauces : [Mayo]
+toppings : [Lettuce, Tomatoes]
+toasted : true
+price : $11.5]
+Drinks :
+[size : Large
+flavor : Iced Tea
+price : $3.0]
+Chips :
+[type : Sour Cream & Onion
+price : $1.5]
+Order Total : 16.0

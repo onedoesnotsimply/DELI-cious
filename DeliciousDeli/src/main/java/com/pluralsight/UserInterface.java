@@ -512,25 +512,26 @@ public class UserInterface {
 
     private void checkoutScreen() {
         System.out.println("---------------------------");
-        System.out.println("Order details\n");
+        System.out.print("Order details");
+
         // Print order
-        System.out.println(order);
+        if (!order.getSandwiches().isEmpty()){
+            System.out.println("\nSandwiches");
+            displayOrder(order.getSandwiches());
+        }
 
+        if (!order.getDrinks().isEmpty()){
+            System.out.println("\nDrinks");
+            displayOrder(order.getDrinks());
+        }
 
-        System.out.println("Sandwiches");
-        for (Sandwich sandwich : order.getSandwiches()) {
-            System.out.println(sandwich);
+        if (!order.getChips().isEmpty()){
+            System.out.println("\nChips");
+            displayOrder(order.getChips());
         }
-        System.out.println("Drinks");
-        for (Drink drink : order.getDrinks()){
-            System.out.println(drink);
-        }
-        System.out.println("Chips");
-        for (Chip chip : order.getChips()){
-            System.out.println(chip);
-        }
+
         // Print out the total of the order
-        //System.out.printf("Order total : %.2f\n", order.getTotal());
+        System.out.printf("\nOrder total : %.2f\n\n", order.getTotal());
 
         System.out.println("""
                 1) Confirm
@@ -544,6 +545,12 @@ public class UserInterface {
             cancelOrder();
         } else if (choice==2){
             cancelOrder();
+        }
+    }
+
+    private <T> void displayOrder(ArrayList<T> items){
+        for (T item : items){
+            System.out.println(item);
         }
     }
 
