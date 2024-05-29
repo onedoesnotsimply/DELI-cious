@@ -38,9 +38,10 @@ public class UserInterface {
         System.out.println("""
                 ---------------------------
                 1) Add Sandwich
-                2) Add Drink
-                3) Add Chips
-                4) Checkout
+                2) Signature Sandwiches
+                3) Add Drink
+                4) Add Chips
+                5) Checkout
                 0) Cancel Order""");
 
         try{
@@ -49,10 +50,12 @@ public class UserInterface {
             if (choice==1){
                 sandwichScreen();
             } else if (choice==2) {
-                drinkScreen();
+                sigSandwichScreen();
             } else if (choice==3) {
-                chipScreen();
+                drinkScreen();
             } else if (choice==4) {
+                chipScreen();
+            } else if (choice==5) {
                 checkoutScreen();
             } else if (choice==0) {
                 // Delete the order
@@ -66,6 +69,98 @@ public class UserInterface {
             scanner.nextLine();
             orderScreen();
         }
+    }
+
+    private void sigSandwichScreen() {
+        System.out.println("---------------------------");
+        System.out.println("Select a signature sandwich");
+
+        System.out.println("""
+                1) BLT
+                2) Philly Cheese Stake
+                0) Back
+                """);
+
+        int choice = scanner.nextInt();
+
+        if (choice==1){
+            BLT blt = new BLT();
+            customize(blt);
+        } else if (choice==2) {
+            PhillyCheeseSteak philly = new PhillyCheeseSteak();
+            customize(philly);
+        } else if (choice==0) {
+            orderScreen();
+        } else {
+            System.out.println("Input out of range");
+            sigSandwichScreen();
+        }
+    }
+
+    private void customize(Sandwich sigSammy) {
+        System.out.printf("""
+                Size : %s
+                Bread : %s
+                Meat : %s [has extra : %b]
+                Cheese : %s [has extra : %b]
+                Toppings : %s
+                Sauces : %s
+                
+                1) Add toppings
+                2) Remove toppings
+                """,sigSammy.getSize(),sigSammy.getBread(),sigSammy.getMeat(), sigSammy.isExtraMeat(),
+                 sigSammy.getCheese(),sigSammy.isExtraCheese(),sigSammy.getToppings(),sigSammy.getSauces());
+
+        if (!sigSammy.isExtraMeat()) {
+            System.out.println("3) Add extra meat");
+        } else {
+            System.out.println("3) Remove extra meat");
+        }
+        if (!sigSammy.isExtraCheese()) {
+            System.out.println("4) Add extra cheese");
+        } else {
+            System.out.println("4) Remove extra cheese");
+        }
+
+        System.out.println("0) Complete customization");
+
+        int choice = scanner.nextInt();
+
+        if (choice==1){
+            toppingsSelect(sigSammy.getToppings());
+            customize(sigSammy);
+        } else if (choice==2) {
+            removeToppings(sigSammy.getToppings());
+            customize(sigSammy);
+        } else if (choice==3) {
+            if (sigSammy.isExtraMeat()){
+                sigSammy.setExtraMeat(false);
+            } else {
+                sigSammy.setExtraMeat(true);
+            }
+        } else if (choice==4) {
+            if (sigSammy.isExtraCheese()){
+                sigSammy.setExtraCheese(false);
+            } else {
+                sigSammy.setExtraCheese(true);
+            }
+        } else if (choice==0) {
+            order.getSandwiches().add(sigSammy);
+            orderScreen();
+        } else {
+            System.out.println("Input out of range");
+        }
+        customize(sigSammy);
+    }
+
+    private void removeToppings(ArrayList<String> toppings){
+        for (int i = 0; i < toppings.size(); i++){
+            System.out.printf("%d) %s\n",i+1, toppings.get(i));
+        }
+        System.out.println("Select topping to remove");
+
+        int choice = scanner.nextInt();
+        toppings.remove(toppings.get(choice-1));
     }
 
     private void sandwichScreen() {

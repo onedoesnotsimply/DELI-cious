@@ -1,0 +1,20 @@
+Order
+Sandwiches
+[size : 8"
+meat : Salami
+extraMeat : true
+cheese : Swiss
+extraCheese : false
+bread : White
+sauces : [Mayo]
+toppings : [Lettuce, Tomatoes]
+toasted : true
+price : $11.5]
+Drinks
+[size : Large
+flavor : Lemonade
+price : $3.0]
+Chips
+[type : Cool Ranch
+price : $1.5]
+Order Total : 16.0

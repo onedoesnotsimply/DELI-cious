@@ -1,0 +1,17 @@
+Order
+Sandwiches
+[size : 8"
+meat : Steak
+extraMeat : true
+cheese : American
+extraCheese : false
+bread : White
+sauces : [Mayo]
+toppings : [Peppers]
+toasted : true
+price : $11.5]
+Drinks
+[]
+Chips
+[]
+Order Total : 11.5
