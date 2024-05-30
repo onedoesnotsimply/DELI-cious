@@ -37,7 +37,8 @@ public class Sandwich {
                 sauces        %s
                 toppings      %s
                 toasted       %s
-                price         $%.2f""")
+                price         $%.2f
+                """)
                 .formatted(size, meat, extraMeat, cheese, extraCheese, bread, sauces, toppings, isToasted, getPrice());
     }
 

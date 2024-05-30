@@ -585,26 +585,27 @@ public class UserInterface {
 
     private void checkoutScreen() {
         System.out.println("---------------------------");
-        System.out.print("----Order details----");
+        System.out.println("----Order details----");
 
         // Print order
         if (!order.getSandwiches().isEmpty()){
-            System.out.println("\n----Sandwiches----");
+            System.out.println("----Sandwiches----");
             displayOrder(order.getSandwiches());
         }
 
         if (!order.getDrinks().isEmpty()){
-            System.out.println("\n----Drinks----");
+            System.out.println("----Drinks----");
             displayOrder(order.getDrinks());
         }
 
         if (!order.getChips().isEmpty()){
-            System.out.println("\n----Chips----");
+            System.out.println("----Chips----");
             displayOrder(order.getChips());
         }
 
         // Print out the total of the order
-        System.out.printf("\nOrder total : $%.2f\n\n", order.getTotal());
+        System.out.println("---------------------------");
+        System.out.printf("Order total : $%.2f\n\n", order.getTotal());
 
         System.out.println("""
                 1) Confirm
@@ -623,7 +624,7 @@ public class UserInterface {
 
     private <T> void displayOrder(ArrayList<T> items){
         for (T item : items){
-            System.out.println(item+"\n");
+            System.out.println(item);
         }
     }
 

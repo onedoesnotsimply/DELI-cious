@@ -18,7 +18,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return ("----Order----\n" +
+        return ("----Order Details----\n" +
                 "----Sandwiches----\n" +
                 "%s\n" +
                 "----Drinks----\n" +
