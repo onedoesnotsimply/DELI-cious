@@ -11,9 +11,7 @@ public class Drink {
 
     @Override
     public String toString() {
-        return "size : " + size + '\n' +
-                "flavor : " + flavor + '\n' +
-                "price : $"+ getPrice();
+        return ("size\t%s\nflavor\t%s\nprice\t$%.2f").formatted(size, flavor, getPrice());
     }
 
     public double getPrice() {

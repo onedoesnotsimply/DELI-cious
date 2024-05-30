@@ -27,16 +27,18 @@ public class Sandwich {
 
     @Override
     public String toString() {
-        return "size : " + size + '\n' +
-                "meat : " + meat + '\n' +
-                "extraMeat : " + extraMeat + '\n' +
-                "cheese : " + cheese + '\n' +
-                "extraCheese : " + extraCheese + '\n'+
-                "bread : " + bread + '\n' +
-                "sauces : " + sauces + '\n' +
-                "toppings : " + toppings + '\n' +
-                "toasted : " + isToasted + '\n' +
-                "price : $" + getPrice();
+        return ("""
+                size          %s
+                meat          %s
+                extraMeat     %s
+                cheese        %s
+                extraCheese   %s
+                bread         %s
+                sauces        %s
+                toppings      %s
+                toasted       %s
+                price         $%.2f""")
+                .formatted(size, meat, extraMeat, cheese, extraCheese, bread, sauces, toppings, isToasted, getPrice());
     }
 
     // Getters and setters

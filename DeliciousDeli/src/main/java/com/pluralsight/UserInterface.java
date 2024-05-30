@@ -99,12 +99,12 @@ public class UserInterface {
 
     private void customize(Sandwich sigSammy) {
         System.out.printf("""
-                Size : %s
-                Bread : %s
-                Meat : %s [has extra : %b]
-                Cheese : %s [has extra : %b]
-                Toppings : %s
-                Sauces : %s
+                size        %s
+                bread       %s
+                meat        %s\n---- extra meat - %b
+                cheese      %s\n---- extra cheese - %b
+                toppings    %s
+                sauces      %s
                 
                 1) Add toppings
                 2) Remove toppings
@@ -128,10 +128,10 @@ public class UserInterface {
 
         if (choice==1){
             toppingsSelect(sigSammy.getToppings());
-            customize(sigSammy);
+            //customize(sigSammy);
         } else if (choice==2) {
             removeToppings(sigSammy.getToppings());
-            customize(sigSammy);
+            //customize(sigSammy);
         } else if (choice==3) {
             if (sigSammy.isExtraMeat()){
                 sigSammy.setExtraMeat(false);
@@ -202,12 +202,12 @@ public class UserInterface {
         saucesSelect(sauces);
 
         System.out.println("---------------------------");
-        System.out.println("Would you like your sandwich toasted (Y/N)");
-        scanner.nextLine();
-        String toasted = scanner.nextLine();
+        System.out.println("Would you like your sandwich toasted?\n1) Yes\n2) No");
+
+        int toasted = scanner.nextInt();
 
         boolean isToasted = false;
-        if (toasted.equalsIgnoreCase("y")){
+        if (toasted==1) {
             isToasted = true;
         }
 
@@ -284,62 +284,36 @@ public class UserInterface {
                 9) Mushrooms
                 0) None
                 """);
+
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
                 toppings.add("Lettuce");
-                if (extraTopping("Lettuce")){
-                    toppings.add("Extra Lettuce");
-                }
                 break;
             case 2:
                 toppings.add("Peppers");
-                if (extraTopping("Peppers")){
-                    toppings.add("Extra Peppers");
-                }
                 break;
             case 3:
                 toppings.add("Onions");
-                if (extraTopping("Onions")){
-                    toppings.add("Extra Onions");
-                }
                 break;
             case 4:
                 toppings.add("Tomatoes");
-                if (extraTopping("Tomatoes")){
-                    toppings.add("Extra Tomatoes");
-                }
                 break;
             case 5:
                 toppings.add("Jalapenos");
-                if (extraTopping("Jalapenos")){
-                    toppings.add("Extra Jalapenos");
-                }
                 break;
             case 6:
                 toppings.add("Cucumbers");
-                if (extraTopping("Cucumbers")){
-                    toppings.add("Extra Cucumbers");
-                }
                 break;
             case 7:
                 toppings.add("Pickles");
-                if(extraTopping("Pickles")){
-                    toppings.add("Extra Pickles");
-                }
                 break;
             case 8:
                 toppings.add("Guacamole");
-                if (extraTopping("Guacamole")){
-                    toppings.add("Extra Guacamole");
-                }
                 break;
             case 9:
                 toppings.add("Mushrooms");
-                if (extraTopping("Mushrooms")){
-                    toppings.add("Extra Mushrooms");
-                }
                 break;
             case 0:
                 toppings.add("None");
@@ -358,16 +332,20 @@ public class UserInterface {
             choice = scanner.nextInt();
             if (choice==1){
                 toppingsSelect(toppings);
+            } else if (choice==2) {
+                System.out.println("Toppings saved");
+            } else {
+                System.out.println("Input out of range");
             }
         }
     }
 
     private boolean extraTopping(String topping) {
         if (!topping.isEmpty()) {
-            System.out.printf("Would you like extra %s? (Y/N)\n", topping);
-            scanner.nextLine();
-            String choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("y")){
+            System.out.println("Add extra?\n1) Yes\n2) No\n");
+
+            int choice = scanner.nextInt();
+            if (choice==1){
                 return true;
             }
         }
@@ -607,26 +585,26 @@ public class UserInterface {
 
     private void checkoutScreen() {
         System.out.println("---------------------------");
-        System.out.print("Order details");
+        System.out.print("----Order details----");
 
         // Print order
         if (!order.getSandwiches().isEmpty()){
-            System.out.println("\nSandwiches");
+            System.out.println("\n----Sandwiches----");
             displayOrder(order.getSandwiches());
         }
 
         if (!order.getDrinks().isEmpty()){
-            System.out.println("\nDrinks");
+            System.out.println("\n----Drinks----");
             displayOrder(order.getDrinks());
         }
 
         if (!order.getChips().isEmpty()){
-            System.out.println("\nChips");
+            System.out.println("\n----Chips----");
             displayOrder(order.getChips());
         }
 
         // Print out the total of the order
-        System.out.printf("\nOrder total : %.2f\n\n", order.getTotal());
+        System.out.printf("\nOrder total : $%.2f\n\n", order.getTotal());
 
         System.out.println("""
                 1) Confirm
@@ -645,7 +623,7 @@ public class UserInterface {
 
     private <T> void displayOrder(ArrayList<T> items){
         for (T item : items){
-            System.out.println(item);
+            System.out.println(item+"\n");
         }
     }
 

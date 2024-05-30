@@ -18,11 +18,14 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order\n" +
-                "Sandwiches\n" + sandwiches +
-                "\nDrinks\n" + drinks +
-                "\nChips\n" + chips +
-                "\nOrder Total : " + getTotal();
+        return ("----Order----\n" +
+                "----Sandwiches----\n" +
+                "%s\n" +
+                "----Drinks----\n" +
+                "%s\n----Chips----\n" +
+                "%s\n" +
+                "Order Total : $%.2f")
+                .formatted(sandwiches, drinks, chips, getTotal());
     }
 
 
@@ -37,12 +40,6 @@ public class Order {
     public ArrayList<Chip> getChips() {
         return chips;
     }
-
-    /*public void setTotal(double total) {
-        this.total = total;
-    }
-
-     */
 
     public double getTotal() {
         double total = 0.0;

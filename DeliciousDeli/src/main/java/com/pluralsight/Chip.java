@@ -11,8 +11,7 @@ public class Chip {
 
     @Override
     public String toString() {
-        return "type : " + type + '\n' +
-                "price : $" + price;
+        return "type\t%s\nprice\t$%.2f".formatted(type, price);
     }
 
     public double getPrice() {

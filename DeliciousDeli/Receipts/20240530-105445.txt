@@ -1,0 +1,17 @@
+----Order----
+----Sandwiches----
+[size          8"
+meat          Bacon
+extraMeat     false
+cheese        Cheddar
+extraCheese   false
+bread         White
+sauces        [Ranch]
+toppings      [Lettuce, Tomato]
+toasted       true
+price         $10.50]
+----Drinks----
+[]
+----Chips----
+[]
+Order Total : $10.50
