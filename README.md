@@ -46,3 +46,8 @@ Both options bring you back to the homescreen.
 
 I found creating my saveReceipt() method interesting because I had to create a file object in order to save the 
 the .txt file to a folder
+
+### Class Diagram
+![image](https://github.com/onedoesnotsimply/DELI-cious/assets/114696575/efd5f1a2-0d6c-44ac-94ec-14ae85d78c03)
+
+
